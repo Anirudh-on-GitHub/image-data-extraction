@@ -21,8 +21,7 @@ def process(folder_path):
             response = model.generate_content([prompt, img],safety_settings=safe)
             result=json.loads(response.text.strip('`json\\n'))
 
-            df=pd.DataFrame(result)
-            df.insert(0,'file_name',file_name)        
+            df=pd.DataFrame(result)        
             df.to_csv(os.path.join(output_dir,f"{img_id}.csv"),index=False)
             logging.info(f"Results saved for image : {file_name}")
         except Exception as e:
